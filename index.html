@@ -3,590 +3,765 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diana's Neon Party - 30 Años</title>
+    <title>Te invito a mi Party Neon</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@300;400;600;700;800&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* Fondo animado con partículas neón */
-        .neon-bg {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at top, #1a0033 0%, #000 100%);
-            z-index: -2;
-        }
-
-        .particles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.4;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            animation: float 20s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-        }
-
-        /* Hero Section con efecto reveal */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, #ff00ff, transparent, #00ffff, transparent);
-            animation: rotate 10s linear infinite;
-            opacity: 0.1;
-        }
-
-        @keyframes rotate {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Perfil con efecto hexagonal */
-
-        .profile-container {
-            position: relative;
-            width: 350px;
-            height: 350px;
-            margin-bottom: 2rem;
-            animation: fadeInScale 1s ease-out;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.5) rotate(-10deg);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-        }
-
-        .hexagon {
-            position: relative;
-            width: 350px;
-            height: 350px;
-            margin: 15px auto;
-              clip-path: polygon(
-    10% 0%,  /* esquina superior izquierda recortada */
-    90% 0%,  /* esquina superior derecha recortada */
-    100% 10%,
-    100% 90%,
-    90% 100%, /* esquina inferior derecha recortada */
-    10% 100%, /* esquina inferior izquierda recortada */
-    0% 90%,
-    0% 10%
-  );
-            background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { 
-                filter: brightness(1) drop-shadow(0 0 20px #ff00ff) drop-shadow(0 0 40px #00ffff);
-            }
-            50% { 
-                filter: brightness(1.3) drop-shadow(0 0 40px #ff00ff) drop-shadow(0 0 80px #00ffff);
-            }
-        }
-
-        .hexagon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-              clip-path: polygon(
-    10% 0%,  /* esquina superior izquierda recortada */
-    90% 0%,  /* esquina superior derecha recortada */
-    100% 10%,
-    100% 90%,
-    90% 100%, /* esquina inferior derecha recortada */
-    10% 100%, /* esquina inferior izquierda recortada */
-    0% 90%,
-    0% 10%
-  );
-        }
-
-        .name-title {
-            font-family: 'Righteous', cursive;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-flow 3s linear infinite, textAppear 1s ease-out 0.3s both;
-            filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.5));
-        }
-
-        @keyframes gradient-flow {
-            to { background-position: 200% center; }
-        }
-
-        @keyframes textAppear {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .age-badge {
-            font-family: 'Righteous', cursive;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            display: inline-block;
-            padding: 0.5rem 2rem;
-            background: rgba(255, 0, 255, 0.2);
-            border: 3px solid #ff00ff;
-            border-radius: 50px;
-            margin: 1rem 0;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6), inset 0 0 20px rgba(255, 0, 255, 0.2);
-            animation: textAppear 1s ease-out 0.6s both;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            color: #ffff00;
-            text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00;
-            margin: 1rem 0;
-            animation: textAppear 1s ease-out 0.9s both;
-        }
-
-        .hero-date {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            font-weight: 700;
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-            animation: textAppear 1s ease-out 1.2s both;
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        .scroll-indicator::after {
-            content: '↓';
-            font-size: 2rem;
-            color: #ff00ff;
-            filter: drop-shadow(0 0 10px #ff00ff);
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-20px); }
-            60% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        /* Secciones con reveal al scroll */
-        .section {
-            background: rgba(10, 10, 10, 0.8);
-            padding: 4rem 2rem;
-            margin: 2rem auto;
-            max-width: 1000px;
-            border-radius: 30px;
-            position: relative;
-            backdrop-filter: blur(10px);
-            border: 2px solid transparent;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-            border-color: #ff00ff;
-            box-shadow: 0 0 40px rgba(255, 0, 255, 0.4);
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
-            border-radius: 30px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.6s;
-            animation: borderRotate 4s linear infinite;
-        }
-
-        .section.visible::before {
-            opacity: 0.4;
-        }
-
-        @keyframes borderRotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-
-        .section-title {
-            font-family: 'Righteous', cursive;
-            text-align: center;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            margin-bottom: 2rem;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5));
-        }
-
-        /* Ilustraciones con hover effect */
-        .illustration-container {
-            text-align: center;
-            margin: 2rem 0;
-            perspective: 1000px;
-        }
-
-        .illustration-img {
-            max-width: 70%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border-radius: 20px;
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.4));
-        }
-
-        .illustration-img:hover {
-            transform: scale(1.05) rotateY(5deg);
-            filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.8));
-        }
-
-        /* Countdown mejorado */
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem auto;
-            max-width: 600px;
-        }
-
-        .countdown-item {
-            position: relative;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
-            padding: 2rem 1rem;
-            border-radius: 20px;
-            border: 2px solid #ff00ff;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            overflow: hidden;
-        }
-
-        .countdown-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: translateX(-100%);
-        }
-
-        .countdown-item:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 10px 40px rgba(255, 0, 255, 0.6);
-            border-color: #00ffff;
-        }
-
-        .countdown-item:hover::before {
-            animation: shine 0.6s;
-        }
-
-        @keyframes shine {
-            to { transform: translateX(100%); }
-        }
-
-        .countdown-number {
-            font-family: 'Righteous', cursive;
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: bold;
-            display: block;
-            color: #00ffff;
-            text-shadow: 0 0 20px #00ffff;
-            line-height: 1;
-        }
-
-        .countdown-label {
-            font-size: 1rem;
-            margin-top: 0.5rem;
-            color: #ffff00;
-            text-shadow: 0 0 10px #ffff00;
-            font-weight: 600;
-        }
-
-        /* Info boxes con efecto glassmorphism */
-        .info-box {
-            background: rgba(255, 0, 255, 0.05);
-            padding: 2rem;
-            border-radius: 20px;
-            margin: 1.5rem 0;
-            border: 2px solid rgba(255, 0, 255, 0.3);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
-        }
-
-        .info-box:hover {
-            background: rgba(255, 0, 255, 0.1);
-            border-color: #ff00ff;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
-            transform: translateY(-5px);
-        }
-
-        .info-box h3 {
-            color: #ffff00;
-            margin-bottom: 1rem;
-            font-size: clamp(1.3rem, 4vw, 1.8rem);
-            text-shadow: 0 0 10px #ffff00;
-            font-weight: 700;
-        }
-
-        .info-box p {
-            line-height: 1.8;
-            font-size: clamp(1rem, 3vw, 1.1rem);
-        }
-
-        /* Botones con efecto futurista */
-        .btn {
-            display: inline-block;
-            position: relative;
-            background: linear-gradient(135deg, #ff00ff, #00ffff);
-            color: #000;
-            padding: 1.2rem 3rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            margin: 1rem 0.5rem;
-            font-weight: 700;
-            overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .btn:hover::before {
-            opacity: 1;
-        }
-
-        .btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(255, 0, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
-        }
-
-        /* Mapa container */
-        .map-container {
-            width: 100%;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            margin: 1.5rem 0;
-            border: 3px solid #ff00ff;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-            transition: all 0.3s;
-        }
-
-        .map-container:hover {
-            border-color: #00ffff;
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
-            transform: scale(1.02);
-        }
-
-        /* Galería mejorada */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            aspect-ratio: 1;
-            cursor: pointer;
-            border: 2px solid #ff00ff;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .gallery-item::after {
-            content: '🔍';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            font-size: 3rem;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-
-        .gallery-item:hover::after {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-        }
-
-        .gallery-item:hover {
-            border-color: #00ffff;
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
-            transform: scale(1.05) rotate(2deg);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.4s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.2);
-            filter: brightness(0.7);
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Modal mejorado */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 20px;
-            border: 3px solid #ff00ff;
-            box-shadow: 0 0 100px rgba(255, 0, 255, 0.8);
-            animation: zoomIn 0.3s;
-        }
-
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #ff00ff;
-            font-size: 50px;
-            cursor: pointer;
-            text-shadow: 0 0 20px #ff00ff;
-            transition: all 0.3s;
-            z-index: 1001;
-        }
-
-        .close:hover {
-            color: #00ffff;
-            text-shadow: 0 0 30px #00ffff;
-            transform: rotate(90deg) scale(1.2);
-        }
-
-        @media (max-width: 768px) {
-            .section {
-                margin: 1rem;
-                padding: 2rem 1rem;
-            }
-
-            .profile-container {
-                width: 300px;
-                height: 300px;
-            }
-
-            .hexagon {
-                width: 280px;
-                height: 280px;
-            }
-
-            .illustration-img {
-                max-width: 85%;
-            }
-
-            .countdown {
-                gap: 1rem;
-            }
-
-            .countdown-item {
-                padding: 1.5rem 0.5rem;
-            }
-        }
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@300;400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Fondo animado con partículas neón */
+.neon-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top, #1a0033 0%, #000 100%);
+    z-index: -2;
+}
+
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    animation: float 20s infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+}
+
+/* Hero Section con efecto reveal */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, #ff00ff, transparent, #00ffff, transparent);
+    animation: rotate 10s linear infinite;
+    opacity: 0.1;
+}
+
+@keyframes rotate {
+    100% { transform: rotate(360deg); }
+}
+
+/* Perfil con efecto hexagonal */
+.profile-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin-bottom: 2rem;
+    animation: fadeInScale 1s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.hexagon {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin: 15px auto;
+    clip-path: polygon(
+        10% 0%,
+        90% 0%,
+        100% 10%,
+        100% 90%,
+        90% 100%,
+        10% 100%,
+        0% 90%,
+        0% 10%
+    );
+    background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { 
+        filter: brightness(1) drop-shadow(0 0 20px #ff00ff) drop-shadow(0 0 40px #00ffff);
+    }
+    50% { 
+        filter: brightness(1.3) drop-shadow(0 0 40px #ff00ff) drop-shadow(0 0 80px #00ffff);
+    }
+}
+
+.hexagon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: polygon(
+        10% 0%,
+        90% 0%,
+        100% 10%,
+        100% 90%,
+        90% 100%,
+        10% 100%,
+        0% 90%,
+        0% 10%
+    );
+}
+
+.name-title {
+    font-family: 'Righteous', cursive;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-flow 3s linear infinite, textAppear 1s ease-out 0.3s both;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.5));
+}
+
+@keyframes gradient-flow {
+    to { background-position: 200% center; }
+}
+
+@keyframes textAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.age-badge {
+    font-family: 'Righteous', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    background: rgba(255, 0, 255, 0.2);
+    border: 3px solid #ff00ff;
+    border-radius: 50px;
+    margin: 1rem 0;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.6), inset 0 0 20px rgba(255, 0, 255, 0.2);
+    animation: textAppear 1s ease-out 0.6s both;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00;
+    margin: 1rem 0;
+    animation: textAppear 1s ease-out 0.9s both;
+}
+
+.hero-date {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: 700;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    animation: textAppear 1s ease-out 1.2s both;
+    margin-bottom: 2rem;
+}
+
+/* ============== REPRODUCTOR DE MÚSICA (INTEGRADO) ============== */
+.music-player {
+    max-width: 500px;
+    margin: 2rem auto 0;
+    padding: 1.2rem 1.5rem;
+    background: rgba(255, 0, 255, 0.05);
+    border: 2px solid rgba(255, 0, 255, 0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    animation: textAppear 1s ease-out 1.5s both;
+}
+
+.player-compact {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.vinyl-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff00ff, #00ffff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    animation: spin 3s linear infinite;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+}
+
+.vinyl-icon.paused {
+    animation-play-state: paused;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.song-info-compact {
+    flex: 1;
+    min-width: 0;
+}
+
+.song-title-compact {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #00ffff;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-artist-compact {
+    font-size: 0.75rem;
+    color: #ffff00;
+    text-shadow: 0 0 6px rgba(255, 255, 0, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-controls-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.control-btn-compact {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border: 2px solid rgba(255, 0, 255, 0.5);
+    background: rgba(255, 0, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    color: #ff00ff;
+}
+
+.control-btn-compact:hover {
+    background: rgba(255, 0, 255, 0.2);
+    border-color: #00ffff;
+    color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.control-btn-compact.play-pause {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    font-size: 1.1rem;
+    border-width: 2px;
+}
+
+.volume-compact {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+.volume-compact:hover {
+    transform: scale(1.1);
+}
+
+.progress-container-compact {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 0, 255, 0.2);
+    border-radius: 10px;
+    margin-top: 1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar-compact {
+    height: 100%;
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+}
+
+.time-display-compact {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.3rem;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator::after {
+    content: '↓';
+    font-size: 2rem;
+    color: #ff00ff;
+    filter: drop-shadow(0 0 10px #ff00ff);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-20px); }
+    60% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Secciones con reveal al scroll */
+.section {
+    background: rgba(10, 10, 10, 0.8);
+    padding: 4rem 2rem;
+    margin: 2rem auto;
+    max-width: 1000px;
+    border-radius: 30px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: #ff00ff;
+    box-shadow: 0 0 40px rgba(255, 0, 255, 0.4);
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+    border-radius: 30px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.6s;
+    animation: borderRotate 4s linear infinite;
+}
+
+.section.visible::before {
+    opacity: 0.4;
+}
+
+@keyframes borderRotate {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+.section-title {
+    font-family: 'Righteous', cursive;
+    text-align: center;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5));
+}
+
+/* Ilustraciones con hover effect */
+.illustration-container {
+    text-align: center;
+    margin: 2rem 0;
+    perspective: 1000px;
+}
+
+.illustration-img {
+    max-width: 70%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.4));
+}
+
+.illustration-img:hover {
+    transform: scale(1.05) rotateY(5deg);
+    filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.8));
+}
+
+/* Countdown mejorado */
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.countdown-item {
+    position: relative;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+    padding: 2rem 1rem;
+    border-radius: 20px;
+    border: 2px solid #ff00ff;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+}
+
+.countdown-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+}
+
+.countdown-item:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 10px 40px rgba(255, 0, 255, 0.6);
+    border-color: #00ffff;
+}
+
+.countdown-item:hover::before {
+    animation: shine 0.6s;
+}
+
+@keyframes shine {
+    to { transform: translateX(100%); }
+}
+
+.countdown-number {
+    font-family: 'Righteous', cursive;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: bold;
+    display: block;
+    color: #00ffff;
+    text-shadow: 0 0 20px #00ffff;
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
+    font-weight: 600;
+}
+
+/* Info boxes con efecto glassmorphism */
+.info-box {
+    background: rgba(255, 0, 255, 0.05);
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 1.5rem 0;
+    border: 2px solid rgba(255, 0, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.info-box:hover {
+    background: rgba(255, 0, 255, 0.1);
+    border-color: #ff00ff;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.info-box h3 {
+    color: #ffff00;
+    margin-bottom: 1rem;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    text-shadow: 0 0 10px #ffff00;
+    font-weight: 700;
+}
+
+.info-box p {
+    line-height: 1.8;
+    font-size: clamp(1rem, 3vw, 1.1rem);
+}
+
+/* Botones con efecto futurista */
+.btn {
+    display: inline-block;
+    position: relative;
+    background: linear-gradient(135deg, #ff00ff, #00ffff);
+    color: #000;
+    padding: 1.2rem 3rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin: 1rem 0.5rem;
+    font-weight: 700;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #00ffff, #ff00ff);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(255, 0, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
+}
+
+/* Mapa container */
+.map-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    border: 3px solid #ff00ff;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+    transition: all 0.3s;
+}
+
+.map-container:hover {
+    border-color: #00ffff;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
+    transform: scale(1.02);
+}
+
+/* Galería mejorada */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    border: 2px solid #ff00ff;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gallery-item::after {
+    content: '🔍';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 3rem;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.gallery-item:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.gallery-item:hover {
+    border-color: #00ffff;
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+    transform: scale(1.05) rotate(2deg);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.2);
+    filter: brightness(0.7);
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Modal mejorado */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 20px;
+    border: 3px solid #ff00ff;
+    box-shadow: 0 0 100px rgba(255, 0, 255, 0.8);
+    animation: zoomIn 0.3s;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #ff00ff;
+    font-size: 50px;
+    cursor: pointer;
+    text-shadow: 0 0 20px #ff00ff;
+    transition: all 0.3s;
+    z-index: 1001;
+}
+
+.close:hover {
+    color: #00ffff;
+    text-shadow: 0 0 30px #00ffff;
+    transform: rotate(90deg) scale(1.2);
+}
+
+/* ============== MEDIA QUERIES ============== */
+@media (max-width: 768px) {
+    .section {
+        margin: 1rem;
+        padding: 2rem 1rem;
+    }
+
+    .profile-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hexagon {
+        width: 280px;
+        height: 280px;
+    }
+
+    .illustration-img {
+        max-width: 85%;
+    }
+
+    .countdown {
+        gap: 1rem;
+    }
+
+    .countdown-item {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .music-player {
+        padding: 1rem;
+    }
+
+    .player-compact {
+        gap: 0.7rem;
+    }
+
+    .control-btn-compact {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        font-size: 0.9rem;
+    }
+
+    .control-btn-compact.play-pause {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+    }
+
+    .vinyl-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 1.1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -601,9 +776,33 @@
         </div>
         
         <h1 class="name-title">Diana Alejandra</h1>
-        <div class="age-badge">✨ 30 Años ✨</div>
+        <div class="age-badge">🎓🌸 Mis 30's 🌸🎓<br>✨ serán bonitos ✨</div>
         <p class="hero-subtitle">💜 Celebra conmigo esta fiesta Neón 💜</p>
-        <p class="hero-date">🎊 29 de Diciembre 2025 🎊</p>
+        <p class="hero-date">🎊 20 de Diciembre 2025 🎊</p>
+        
+        <!-- ============== REPRODUCTOR DE MÚSICA (INTEGRADO) ============== -->
+        <div class="music-player">
+            <div class="player-compact">
+                <div class="vinyl-icon" id="vinylIcon">🎵</div>
+                <div class="song-info-compact">
+                    <div class="song-title-compact" id="songTitle">Canción</div>
+                    <div class="song-artist-compact" id="songArtist">Artista</div>
+                </div>
+                <div class="player-controls-compact">
+                    <div class="control-btn-compact" id="prevBtn">⏮️</div>
+                    <div class="control-btn-compact play-pause" id="playPauseBtn">▶️</div>
+                    <div class="control-btn-compact" id="nextBtn">⏭️</div>
+                    <div class="volume-compact" id="volumeIcon">🔊</div>
+                </div>
+            </div>
+            <div class="progress-container-compact" id="progressContainer">
+                <div class="progress-bar-compact" id="progressBar"></div>
+            </div>
+            <div class="time-display-compact">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
         
         <div class="scroll-indicator"></div>
     </div>
@@ -645,6 +844,7 @@
         
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d940.4546341789853!2d-99.11819795023295!3d19.46338905770015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f998cd3aa5c7%3A0xc472d01ddc43a8df!2sSal%C3%B3n%20De%20Fiestas.%20Santander!5e0!3m2!1ses-419!2smx!4v1759967076390!5m2!1ses-419!2smx"
+                title="Salón de fiestas Santander"
                 width="100%" 
                 height="100%" 
                 style="border:0;" 
@@ -668,12 +868,12 @@
         </div>
         
         <div class="info-box">
-            <h3>⏰ Puedes llegar a partir de las 18:00 hrs</h3>
+            <h3>⏰ Puedes llegar a partir de las 19:00 hrs</h3>
             <p>¡Te esperamos para celebrar juntos mi Cumpleaños y Graduación bajo las luces neón! 💜✨</p>
         </div>
         
         <div class="text-center">
-            <a href="https://calendar.app.google/4hScPA824HkXipjV6" target="_blank" class="btn">
+            <a href="https://calendar.app.google/mgA6JsZ5eSH7kKpUA" target="_blank" class="btn">
                 <span>📅 Agendar en Calendar</span>
             </a>
         </div>
@@ -683,7 +883,7 @@
         <h2 class="section-title">Dress Code & Bebidas</h2>
         
         <div class="illustration-container">
-           <img src="ilmgs/CBB03.png" alt="Dress Code" class="illustration-img">
+           <img src="ilmgs/CBB03.webp" alt="Dress Code" class="illustration-img">
         </div>
         
         <div class="info-box">
@@ -738,168 +938,337 @@
         </div>
         
         <div class="text-center">
-            <a href="https://calendar.app.google/4hScPA824HkXipjV6" target="_blank" class="btn">
+            <a href="https://calendar.app.google/mgA6JsZ5eSH7kKpUA" target="_blank" class="btn">
                 <span>🎉 Confirmar Asistencia</span>
             </a>
         </div>
     </div>
 
+    <!-- Modal para galería -->
     <div id="imageModal" class="modal" onclick="closeModal()">
         <span class="close">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
 
+    <audio id="audioPlayer" preload="auto"></audio>
+
     <script>
-        // Crear partículas neón
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const colors = ['#ff00ff', '#00ffff', '#ffff00', '#ff0080'];
-            
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
-                container.appendChild(particle);
-            }
+// Crear partículas neón
+function createParticles() {
+    const container = document.getElementById('particles');
+    const colors = ['#ff00ff', '#00ffff', '#ffff00', '#ff0080'];
+    
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+        container.appendChild(particle);
+    }
+}
+
+// Intersection Observer para animaciones al scroll
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
         }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+});
 
-        // Intersection Observer para animaciones al scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+document.querySelectorAll('[data-aos]').forEach(el => {
+    observer.observe(el);
+});
+
+// Cuenta regresiva
+const eventDate = new Date('December 20, 2025 19:00:00').getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+    
+    if (distance < 0) {
+        document.getElementById('countdown').innerHTML = '<div style="grid-column: 1/-1;"><h3 style="color: #ff00ff; text-shadow: 0 0 20px #ff00ff; font-size: 2rem;">¡La fiesta neón ha comenzado! 🎉💜</h3></div>';
+        return;
+    }
+    
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Galería modal
+function openModal(element) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    modal.classList.add('active');
+    modalImg.src = element.querySelector('img').src;
+}
+
+function closeModal() {
+    document.getElementById('imageModal').classList.remove('active');
+}
+
+// Cerrar modal con tecla Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+
+// Prevenir propagación del click en la imagen del modal
+document.getElementById('modalImage').addEventListener('click', function(e) {
+    e.stopPropagation();
+});
+
+// Efecto parallax suave al scroll
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    const particles = document.getElementById('particles');
+    
+    if (particles) {
+        particles.style.transform = `translateY(${currentScroll * 0.5}px)`;
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Inicializar partículas
+createParticles();
+
+// ============== REPRODUCTOR DE MÚSICA ==============
+const audioPlayer = document.getElementById('audioPlayer');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const progressBar = document.getElementById('progressBar');
+const progressContainer = document.getElementById('progressContainer');
+const currentTimeEl = document.getElementById('currentTime');
+const durationEl = document.getElementById('duration');
+const volumeIcon = document.getElementById('volumeIcon');
+const vinylIcon = document.getElementById('vinylIcon');
+const songTitle = document.getElementById('songTitle');
+const songArtist = document.getElementById('songArtist');
+
+// Playlist - AQUÍ CAMBIAS TUS CANCIONES
+const playlist = [
+    {
+        title: 'Mañana será más bonito',
+        artist: 'KAROL G',
+        src: 'music/MSB.mp3' // ← Cambia esta ruta por tu archivo MP3
+    },
+    {
+        title: 'Mientras me curo del cora',
+        artist: 'KAROL G',
+        src: 'music/MMCDC.mp3' // ← Cambia esta ruta por tu archivo MP3
+    },
+    {
+        title: 'BESTIES',
+        artist: 'KAROL G',
+        src: 'music/BESTIES.mp3' // ← Cambia esta ruta por tu archivo MP3
+    }
+];
+
+let currentSongIndex = 0;
+let isPlaying = false;
+let isMuted = false;
+let previousVolume = 0.7;
+
+// Cargar canción
+function loadSong(index) {
+    const song = playlist[index];
+    audioPlayer.src = song.src;
+    songTitle.textContent = song.title;
+    songArtist.textContent = song.artist;
+}
+
+// Play/Pause
+function togglePlayPause() {
+    if (isPlaying) {
+        audioPlayer.pause();
+        playPauseBtn.textContent = '▶️';
+        vinylIcon.classList.add('paused');
+        isPlaying = false;
+    } else {
+        audioPlayer.play().catch(e => {
+            console.log('Reproducción automática bloqueada:', e);
         });
+        playPauseBtn.textContent = '⏸️';
+        vinylIcon.classList.remove('paused');
+        isPlaying = true;
+    }
+}
 
-        document.querySelectorAll('[data-aos]').forEach(el => {
-            observer.observe(el);
-        });
+// Canción anterior
+function prevSong() {
+    currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+    loadSong(currentSongIndex);
+    if (isPlaying) {
+        audioPlayer.play();
+    }
+}
 
-        // Cuenta regresiva
-        const eventDate = new Date('December 29, 2025 18:00:00').getTime();
+// Canción siguiente
+function nextSong() {
+    currentSongIndex = (currentSongIndex + 1) % playlist.length;
+    loadSong(currentSongIndex);
+    if (isPlaying) {
+        audioPlayer.play();
+    }
+}
+
+// Actualizar barra de progreso
+function updateProgress() {
+    const { duration, currentTime } = audioPlayer;
+    if (duration) {
+        const progressPercent = (currentTime / duration) * 100;
+        progressBar.style.width = progressPercent + '%';
         
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-            
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<div style="grid-column: 1/-1;"><h3 style="color: #ff00ff; text-shadow: 0 0 20px #ff00ff; font-size: 2rem;">¡La fiesta neón ha comenzado! 🎉💜</h3></div>';
-                return;
-            }
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        currentTimeEl.textContent = formatTime(currentTime);
+        durationEl.textContent = formatTime(duration);
+    }
+}
 
-        // Galería modal
-        function openModal(element) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modal.classList.add('active');
-            modalImg.src = element.querySelector('img').src;
-        }
+// Formatear tiempo
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
 
-        function closeModal() {
-            document.getElementById('imageModal').classList.remove('active');
-        }
+// Click en barra de progreso
+function setProgress(e) {
+    const width = progressContainer.clientWidth;
+    const clickX = e.offsetX;
+    const duration = audioPlayer.duration;
+    audioPlayer.currentTime = (clickX / width) * duration;
+}
 
-        // Cerrar modal con tecla Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
+// Mutear/desmutear con click en el ícono
+function toggleMute() {
+    if (isMuted) {
+        audioPlayer.volume = previousVolume;
+        volumeIcon.textContent = previousVolume < 0.5 ? '🔉' : '🔊';
+        isMuted = false;
+    } else {
+        previousVolume = audioPlayer.volume;
+        audioPlayer.volume = 0;
+        volumeIcon.textContent = '🔇';
+        isMuted = true;
+    }
+}
 
-        // Prevenir propagación del click en la imagen del modal
-        document.getElementById('modalImage').addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+// Event Listeners del reproductor
+playPauseBtn.addEventListener('click', togglePlayPause);
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);
+audioPlayer.addEventListener('timeupdate', updateProgress);
+progressContainer.addEventListener('click', setProgress);
+volumeIcon.addEventListener('click', toggleMute);
 
-        // Efecto parallax suave al scroll
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            const particles = document.getElementById('particles');
-            
-            if (particles) {
-                particles.style.transform = `translateY(${currentScroll * 0.5}px)`;
-            }
-            
-            lastScroll = currentScroll;
-        });
+// Cuando termina una canción, pasar a la siguiente
+audioPlayer.addEventListener('ended', nextSong);
 
-        // Inicializar partículas
-        createParticles();
+// Cargar primera canción
+loadSong(currentSongIndex);
+audioPlayer.volume = 0.7;
 
-        // Smooth scroll para todos los enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+// Intentar reproducción automática después de la carga
+window.addEventListener('load', () => {
+    document.body.style.overflow = 'visible';
+    
+    // Intentar reproducir automáticamente
+    setTimeout(() => {
+        audioPlayer.play()
+            .then(() => {
+                isPlaying = true;
+                playPauseBtn.textContent = '⏸️';
+                vinylIcon.classList.remove('paused');
+            })
+            .catch(() => {
+                console.log('Reproducción automática bloqueada. El usuario debe interactuar primero.');
             });
-        });
+    }, 1000);
+});
 
-        // Efecto de cursor neón (opcional, solo desktop)
-        if (window.innerWidth > 768) {
-            const cursor = document.createElement('div');
-            cursor.style.cssText = `
-                position: fixed;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background: radial-gradient(circle, #ff00ff, transparent);
-                pointer-events: none;
-                z-index: 9999;
-                mix-blend-mode: screen;
-                transition: transform 0.2s ease;
-            `;
-            document.body.appendChild(cursor);
+// Reproducir al hacer click en cualquier parte (fallback para autoplay)
+let hasInteracted = false;
+document.body.addEventListener('click', () => {
+    if (!hasInteracted && !isPlaying) {
+        hasInteracted = true;
+        audioPlayer.play()
+            .then(() => {
+                isPlaying = true;
+                playPauseBtn.textContent = '⏸️';
+                vinylIcon.classList.remove('paused');
+            })
+            .catch(() => {});
+    }
+}, { once: true });
 
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX - 10 + 'px';
-                cursor.style.top = e.clientY - 10 + 'px';
-            });
-
-            document.querySelectorAll('a, button, .gallery-item').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(2)';
-                    cursor.style.background = 'radial-gradient(circle, #00ffff, transparent)';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
-                    cursor.style.background = 'radial-gradient(circle, #ff00ff, transparent)';
-                });
+// Smooth scroll para todos los enlaces internos
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
         }
+    });
+});
 
-        // Prevenir scroll mientras se carga la página
-        window.addEventListener('load', () => {
-            document.body.style.overflow = 'visible';
+// Efecto de cursor neón (opcional, solo desktop)
+if (window.innerWidth > 768) {
+    const cursor = document.createElement('div');
+    cursor.style.cssText = `
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #ff00ff, transparent);
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: screen;
+        transition: transform 0.2s ease;
+    `;
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+    });
+
+    document.querySelectorAll('a, button, .gallery-item').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2)';
+            cursor.style.background = 'radial-gradient(circle, #00ffff, transparent)';
         });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.background = 'radial-gradient(circle, #ff00ff, transparent)';
+        });
+    });
+}
     </script>
 </body>
 </html>
